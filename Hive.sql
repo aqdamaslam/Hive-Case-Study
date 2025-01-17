@@ -24,6 +24,11 @@ CREATE EXTERNAL TABLE IF NOT EXISTS car_insurance_calls (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 'hdfs://path/to/your/data';
+LOCATION '/user/aslam/bootcamp/hive/assignment-1/';
+
+
+-- 1.	How many records are there in the dataset?
+
+select count(*) from car_insurance_calls;
 
 
