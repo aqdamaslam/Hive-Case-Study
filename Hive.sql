@@ -31,4 +31,7 @@ LOCATION '/user/aslam/bootcamp/hive/assignment-1/';
 
 select count(*) from car_insurance_calls;
 
+-- 2.	How many unique job categories are there?
+
+select count(distinct(job)) as distinct_job from car_insurance_calls;
 
