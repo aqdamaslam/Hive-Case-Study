@@ -24,7 +24,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS car_insurance_calls (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION '/user/aslam/bootcamp/hive/assignment-1/';
+LOCATION 'hdfs://path/to/your/data';
 
 
 -- 1.	How many records are there in the dataset?
@@ -34,4 +34,20 @@ select count(*) from car_insurance_calls;
 -- 2.	How many unique job categories are there?
 
 select count(distinct(job)) as distinct_job from car_insurance_calls;
+
+-- 3.	What is the age distribution of customers in the dataset? Provide a breakdown by age group: 18-30, 31-45, 46-60, 61+.
+select case
+when Age between 18 and 30 then '18-30'
+when Age between 31 and 45 then '31-45'
+when Age between 46 and 60 then '46-60'
+else '61+'
+end as age_group,
+count(*) as total_count
+from car_insurance_calls
+group by case
+when Age between 18 and 30 then '18-30'
+when Age between 31 and 45 then '31-45'
+when Age between 46 and 60 then '46-60'
+else '61+'
+end;
 
