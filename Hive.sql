@@ -177,3 +177,6 @@ select Id,
     Marital,
     Education
 from car_insurance_calls;
+
+
+-- 2.	Create a bucketed table on 'Age', bucketed into 4 groups (as per the age groups mentioned above). Load data from the original table into this bucketed table.
