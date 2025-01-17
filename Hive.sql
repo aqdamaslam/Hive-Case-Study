@@ -74,3 +74,24 @@ where
     or CallStart is null
     or CallEnd is null
     or CarInsurance is null;
+
+-- 5.	Determine the number of unique 'Outcome' values and their respective counts.
+
+select Outcome, count(*) from car_insurance_calls group by Outcome;
+
+
+-- 6.	Find the number of customers who have both a car loan and home insurance.
+
+select count(*) from car_insurance_calls where CarLoan = 1 and HHInsurance = 1;
+
+
+-- Aggregations
+
+-- 1.	What is the average, minimum, and maximum balance for each job category?
+
+select Job,
+    avg(Balance) as Average_balance,
+    min(Balance) as Minimum_balance,
+    max(Balance) as Max_balance
+from car_insurance_calls
+group by Job;
