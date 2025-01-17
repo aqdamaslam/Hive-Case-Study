@@ -6,7 +6,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS car_insurance_calls (
     Job STRING,
     Marital STRING,
     Education STRING,
-    Default STRING,
+    `Default` STRING,
     Balance FLOAT,
     HHInsurance STRING,
     CarLoan STRING,
@@ -106,3 +106,74 @@ select CarInsurance, count(*) from car_insurance_calls group by CarInsurance;
 -- 3.	Count the number of customers for each communication type.
 
 select Communication, count(*) from car_insurance_calls group by Communication;
+
+
+-- 4.	Calculate the sum of 'Balance' for each 'Communication' type.
+
+select Communication, sum(Balance) as total_sum from car_insurance_calls group by Communication;
+
+
+-- 5.	Count the number of 'PrevAttempts' for each 'Outcome' type.
+
+select Outcome, count(PrevAttempts) as total_attempts from car_insurance_calls group by Outcome;
+
+
+-- 6.	Calculate the average 'NoOfContacts' for people with and without 'CarInsurance'.
+
+select CarInsurance, avg(NoOfContacts) as Averrage_Contacts from car_insurance_calls group by CarInsurance;
+
+
+
+-- Partitioning and Bucketing
+
+-- 1.	Create a partitioned table on 'Education' and 'Marital' status. Load data from the original table to this new partitioned table.
+
+create external table if not exists car_insurance_calls_partitioned (
+    Id INT,
+    Age INT,
+    Job STRING,
+    `Default` STRING,
+    Balance FLOAT,
+    HHInsurance STRING,
+    CarLoan STRING,
+    Communication STRING,
+    LastContactDay INT,
+    LastContactMonth STRING,
+    NoOfContacts INT,
+    DaysPassed INT,
+    PrevAttempts INT,
+    Outcome STRING,
+    CallStart STRING,
+    CallEnd STRING,
+    CarInsurance STRING
+)
+PARTITIONED BY (Education string, Marital string)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+set hive.exec.dynamic.partition.mode=nonstrict;
+
+insert overwrite table
+car_insurance_calls_partitioned PARTITION(Education,
+Marital)
+select Id,
+    Age,
+    Job,
+    `Default`,
+    Balance,
+    HHInsurance,
+    CarLoan,
+    Communication,
+    LastContactDay,
+    LastContactMonth,
+    NoOfContacts,
+    DaysPassed,
+    PrevAttempts,
+    Outcome,
+    CallStart,
+    CallEnd,
+    CarInsurance,
+    Marital,
+    Education
+from car_insurance_calls;
