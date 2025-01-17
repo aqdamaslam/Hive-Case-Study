@@ -95,3 +95,14 @@ select Job,
     max(Balance) as Max_balance
 from car_insurance_calls
 group by Job;
+
+
+
+-- 2.	Find the total number of customers with and without car insurance.
+
+select CarInsurance, count(*) from car_insurance_calls group by CarInsurance;
+
+
+-- 3.	Count the number of customers for each communication type.
+
+select Communication, count(*) from car_insurance_calls group by Communication;
