@@ -21,5 +21,9 @@ CREATE EXTERNAL TABLE IF NOT EXISTS car_insurance_calls (
     CallEnd STRING,
     CarInsurance STRING
 )
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
 LOCATION 'hdfs://path/to/your/data';
+
+
