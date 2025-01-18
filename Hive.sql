@@ -410,4 +410,12 @@ order by car_insurance_count
 desc
 limit 1;
 
+-- 5.	Calculate the average 'NoOfContacts' for each 'Outcome' and 'Job' combination.
+
+select Outcome, Job,
+avg(NoOfContacts) AS
+average_contacts
+from car_insurance_call
+group by Outcome, Job;
+
 -- 
