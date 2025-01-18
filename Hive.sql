@@ -211,6 +211,7 @@ stored as textfile;
 -- 3.	Add an additional partition on 'Job' to the partitioned table created earlier and move the data accordingly.
 
 -- Hive does not support partition alteration. If we need new partition then we need to create a new table with required partition/s.
+
 create external table if not exists car_insurance_calls_partitioned_new (
     Id INT,
     Age INT,
@@ -275,3 +276,11 @@ row format delimited
 fields terminated by ','
 stored as textfile;
 
+-- loading data into
+
+insert overwrite table
+car_insurance_calls_buckted_new
+select * from car_insurance_calls_buckted;
+
+
+-- 
