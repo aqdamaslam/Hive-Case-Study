@@ -155,7 +155,7 @@ stored as textfile;
 set hive.exec.dynamic.partition.mode=nonstrict;
 
 insert overwrite table
-car_insurance_calls_partitioned PARTITION(Education,
+car_insurance_calls_partitioned partition(Education,
 Marital)
 select Id,
     Age,
@@ -181,7 +181,7 @@ from car_insurance_calls;
 
 -- 2.	Create a bucketed table on 'Age', bucketed into 4 groups (as per the age groups mentioned above). Load data from the original table into this bucketed table.
 
-create table if not exists car_insurance_calls (
+create table if not exists car_insurance_calls_buckted (
     Id INT,
     Age INT,
     Job STRING,
@@ -211,7 +211,7 @@ stored as textfile;
 -- 3.	Add an additional partition on 'Job' to the partitioned table created earlier and move the data accordingly.
 
 -- Hive does not support partition alteration. If we need new partition then we need to create a new table with required partition/s.
-create external table if not exists car_insurance_calls_partitioned (
+create external table if not exists car_insurance_calls_partitioned_new (
     Id INT,
     Age INT,
     `Default` STRING,
@@ -234,7 +234,44 @@ row format delimited
 fields terminated by ','
 stored as textfile;
 
+-- loading data from car_insurance_calls_partitioned table into car_insurance_calls_partitioned_new 
+insert overwrite table
+car_insurance_calls_partitioned_new
+partition(Education, Marital, Job)
+select Id, Age, `Default`, Balance, HHInsurance,
+CarLoan, Communication, LastContactDay,
+LastContactMonth, NoOfContacts, DaysPassed,
+PrevAttempts, Outcome, CallStart, CallEnd,
+CarInsurance, Education, Marital, Job
+from car_insurance_calls_partitioned;
 
--- 
+-- 4.	Increase the number of buckets in the bucketed table to 10 and redistribute the data.
+-- Hive does not support bucketing alteration on existing table if we need new bucket then we need to create new table with required buckets.
 
+
+create table if not exists car_insurance_calls_buckted_new (
+    Id INT,
+    Age INT,
+    Job STRING,
+    Marital STRING,
+    Education STRING,
+    `Default` STRING,
+    Balance FLOAT,
+    HHInsurance STRING,
+    CarLoan STRING,
+    Communication STRING,
+    LastContactDay INT,
+    LastContactMonth STRING,
+    NoOfContacts INT,
+    DaysPassed INT,
+    PrevAttempts INT,
+    Outcome STRING,
+    CallStart STRING,
+    CallEnd STRING,
+    CarInsurance STRING
+)
+clustered by(Age) into 10 buckets
+row format delimited
+fields terminated by ','
+stored as textfile;
 
