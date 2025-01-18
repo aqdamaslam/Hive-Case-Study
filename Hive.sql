@@ -462,3 +462,18 @@ average_balance
 from car_insurance_call
 where CarLoan = 1
 group by Job;
+
+-- 4.	Identify the top 5 job categories that have the most customers with a 'default', and show their average 'balance'.
+
+select Job, AVG(Balance) as
+average_balance
+from (
+select Job, Balance
+from car_insurance_call
+where Default = 1
+) t
+group by Job
+order by count(*) desc
+limit 5;
+
+-- 
