@@ -366,4 +366,13 @@ group by Job
 order by car_insurance_count desc
 limit 1;
 
+-- 2.	Which month has seen the highest number of last contacts?
+
+select LastContactMonth, COUNT(*) as
+contact_count
+from car_insurance_call
+group by LastContactMonth
+order by contact_count desc
+limit 1;
+
 -- 
