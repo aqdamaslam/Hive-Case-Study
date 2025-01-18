@@ -323,5 +323,12 @@ over (partition by Job order by Age) as cumulative_sum
 from car_insurance_call
 order by Age, Job;
 
--- 
+-- 2.	Calculate the running average of 'Balance' for each 'Job' category, ordered by 'Age'.
 
+select Age, Job, Balance,
+sum(Balance)
+over (partition by Job order by Age) as running_average
+from car_insurance_call
+order by Age, Job;
+
+--
