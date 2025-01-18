@@ -455,4 +455,10 @@ group by Communication
 order by average_contacts desc
 limit 3;
 
--- 
+-- 3.	For customers who have a car loan, calculate the average balance for each job category.
+
+select Job, avg(Balance) as
+average_balance
+from car_insurance_call
+where CarLoan = 1
+group by Job;
