@@ -294,4 +294,24 @@ o.Id = p.Id
 group by o.Job, p.Education;
 
 
+-- 2.	Join the original table with the bucketed table and calculate the total 'NoOfContacts' for each 'Age' group.
+
+select o.Age, p.Education, sum(o.NoOfContacts) as
+total_contacts
+from car_insurance_call o
+join car_insurance_calls_buckted_new b on
+o.Id = b.Id
+group by o.NoOfContacts, p.Age;
+
+
+-- 3.	Join the partitioned table and the bucketed table based on the 'Id' field and find the total balance for each education level and marital status for each age group.
+
+select p.Age, b.Education, p.Marital, sum(b.Balance) as
+total_balance
+from car_insurance_data_partitioned_new p
+join car_insurance_calls_buckted_new b on
+p.Id = b.Id
+group by p.Age, p.Education, p.Marital;
+
+
 -- 
