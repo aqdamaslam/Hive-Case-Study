@@ -343,4 +343,12 @@ from car_insurance_call
 where new = 1
 order by Job, Age;
 
+-- 4.	Calculate the rank of 'Balance' within each 'Job' category, ordered by 'Balance' descending.
+
+select Age, Job, Balance, rank() over
+(partition by Job order by Balance
+desc) as balance_rank
+from car_insurance_data
+order by Job, Balance desc;
+
 -- 
