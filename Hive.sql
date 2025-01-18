@@ -283,4 +283,15 @@ car_insurance_calls_buckted_new
 select * from car_insurance_calls_buckted;
 
 
+-- Optimized Joins
+-- 1.	Join the original table with the partitioned table and find out the average 'Balance' for each 'Job' and 'Education' level.
+
+select o.Job, p.Education, avg(o.Balance) as
+average_balance
+from car_insurance_call o
+join car_insurance_data_partitioned_new p on
+o.Id = p.Id
+group by o.Job, p.Education;
+
+
 -- 
