@@ -331,4 +331,16 @@ over (partition by Job order by Age) as running_average
 from car_insurance_call
 order by Age, Job;
 
---
+-- 3.	For each 'Job' category, find the maximum 'Balance' for each 'Age' group using window functions.
+
+select Age, Job, Balance
+from (
+select Age, Job, Balance,
+row_number() over (partition by
+Job, Age order by Balance desc) as new
+from car_insurance_call
+) t
+where new = 1
+order by Job, Age;
+
+-- 
