@@ -147,10 +147,10 @@ create external table if not exists car_insurance_calls_partitioned (
     CallEnd STRING,
     CarInsurance STRING
 )
-PARTITIONED BY (Education string, Marital string)
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY ','
-STORED AS TEXTFILE;
+partitioned by (Education string, Marital string)
+row format delimited
+fields terminated by ','
+stored as textfile;
 
 set hive.exec.dynamic.partition.mode=nonstrict;
 
@@ -208,5 +208,33 @@ fields terminated by ','
 stored as textfile;
 
 
+-- 3.	Add an additional partition on 'Job' to the partitioned table created earlier and move the data accordingly.
+
+-- Hive does not support partition alteration. If we need new partition then we need to create a new table with required partition/s.
+create external table if not exists car_insurance_calls_partitioned (
+    Id INT,
+    Age INT,
+    `Default` STRING,
+    Balance FLOAT,
+    HHInsurance STRING,
+    CarLoan STRING,
+    Communication STRING,
+    LastContactDay INT,
+    LastContactMonth STRING,
+    NoOfContacts INT,
+    DaysPassed INT,
+    PrevAttempts INT,
+    Outcome STRING,
+    CallStart STRING,
+    CallEnd STRING,
+    CarInsurance STRING
+)
+partitioned by (Education string, Marital string, Job STRING)
+row format delimited
+fields terminated by ','
+stored as textfile;
+
+
 -- 
+
 
