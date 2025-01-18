@@ -314,4 +314,14 @@ p.Id = b.Id
 group by p.Age, p.Education, p.Marital;
 
 
+-- Window Function
+-- 1.	Calculate the cumulative sum of 'NoOfContacts' for each 'Job' category, ordered by 'Age'.
+
+select Age, Job, NoOfContacts,
+sum(NoOfContacts)
+over (partition by Job order by Age) as cumulative_sum
+from car_insurance_call
+order by Age, Job;
+
 -- 
+
