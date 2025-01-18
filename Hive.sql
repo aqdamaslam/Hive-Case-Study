@@ -427,4 +427,17 @@ group by LastContactMonth
 order by total_balance desc
 limit 1;
 
+-- Complex joins and aggregations
+-- 1.	For customers who have both a car loan and home insurance, find out the average 'Balance' for each 'Education' level.
+
+select Education, avg(Balance) as
+average_balance
+from (
+select Education, Balance
+from car_insurance_call
+where CarLoan = 1 and
+HHInsurance = 1
+) t
+group by Education;
+
 -- 
