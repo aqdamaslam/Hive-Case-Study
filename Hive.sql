@@ -375,4 +375,25 @@ group by LastContactMonth
 order by contact_count desc
 limit 1;
 
+-- 3.	Calculate the ratio of the number of customers with car insurance to the number of customers without car insurance for each job category.
+
+select r1.Job, r1.car_insurance_count /
+r2.no_car_insurance_count as
+car_insurance_ratio
+from (
+select Job, COUNT(*) as
+car_insurance_count
+from car_insurance_call
+where CarInsurance = 1
+group by Job
+) r1
+join (
+select Job, COUNT(*) as
+no_car_insurance_count
+from car_insurance_call
+where CarInsurance = 0
+group by Job
+) r2
+on r1.Job = r2.Job;
+
 -- 
