@@ -88,23 +88,5 @@ This case study provides a comprehensive analysis of the "Car Insurance Cold Cal
 4. **Top Jobs with Default:**
    - Identify the top 5 job categories with the most customers with a 'default' and their average 'balance'.
 
-### **Advanced Window Functions**
-1. **Contact Difference by Job:**
-   - Calculate the difference in 'NoOfContacts' between each customer and the next highest in the same 'Job' category.
-2. **Balance Difference by Job:**
-   - Calculate the difference between each customer's 'Balance' and the average 'Balance' of their 'Job' category.
-3. **Longest Call Duration by Job:**
-   - Find the customer with the longest call duration for each 'Job' category.
-4. **Moving Average of Contacts:**
-   - Calculate the moving average of 'NoOfContacts' within each 'Job' category, using a window frame of the current row and the two preceding rows.
 
-### **Performance Tuning**
-1. **File Format Experimentation:**
-   - Experiment with ORC and Parquet formats and measure their impact on query performance.
-2. **Compression Levels:**
-   - Use different compression levels and observe their effects on storage and query performance.
-3. **Bucketing Impact:**
-   - Compare execution time of join queries with and without bucketing.
-4. **Query Optimization Techniques:**
-   - Optimize Hive queries using techniques like predicate pushdown and map-side joins, and discuss performance improvements.
 
