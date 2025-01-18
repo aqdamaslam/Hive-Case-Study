@@ -348,7 +348,22 @@ order by Job, Age;
 select Age, Job, Balance, rank() over
 (partition by Job order by Balance
 desc) as balance_rank
-from car_insurance_data
+from car_insurance_call
 order by Job, Balance desc;
+
+
+-- Advanced Aggregations
+-- 1.	Find the job category with the highest number of car insurances.
+
+select Job
+from (
+select Job, COUNT(*) AS
+car_insurance_count
+from car_insurance_data
+where CarInsurance = 1
+group by Job
+) t
+order by car_insurance_count desc
+limit 1;
 
 -- 
