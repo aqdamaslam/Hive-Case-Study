@@ -418,4 +418,13 @@ average_contacts
 from car_insurance_call
 group by Outcome, Job;
 
+-- 6.	Determine the month with the highest total 'Balance' of customers.
+
+select LastContactMonth,
+sum(Balance) AS total_balance
+from car_insurance_call
+group by LastContactMonth
+order by total_balance desc
+limit 1;
+
 -- 
