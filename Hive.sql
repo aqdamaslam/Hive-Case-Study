@@ -440,4 +440,19 @@ HHInsurance = 1
 ) t
 group by Education;
 
+-- 2.	Identify the top 3 'Communication' types for customers with 'CarInsurance', and display their average 'NoOfContacts'.
+
+select Communication,
+avg(NoOfContacts) as
+average_contacts
+from (
+select Communication,
+NoOfContacts
+from car_insurance_call
+where CarInsurance = 1
+) t
+group by Communication
+order by average_contacts desc
+limit 3;
+
 -- 
