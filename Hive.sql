@@ -396,4 +396,18 @@ group by Job
 ) r2
 on r1.Job = r2.Job;
 
+-- 4.	Find out the 'Job' and 'Education' level combination which has the highest number of car insurances.
+
+select Job, Education
+from (
+select Job, Education, COUNT(*)
+as car_insurance_count
+from car_insurance_call
+where CarInsurance = 1
+group by Job, Education
+) a
+order by car_insurance_count
+desc
+limit 1;
+
 -- 
