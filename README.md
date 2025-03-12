@@ -21,7 +21,7 @@ This case study provides a comprehensive analysis of the "Car Insurance Cold Cal
    - Query to find unique 'Outcome' values and their counts.
 6. **Car Loan and Home Insurance:**
    - Query to find the number of customers with both a car loan and home insurance.
-
+ 
 ### **Aggregations**
 1. **Balance Statistics by Job:**
    - Query to calculate the average, minimum, and maximum balance for each job category.
